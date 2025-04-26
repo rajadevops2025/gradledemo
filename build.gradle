@@ -23,7 +23,3 @@ jar {
         attributes 'Main-Class': 'com.example.App'
     }
 }
-
-test {
-    useJUnitPlatform()
-}
