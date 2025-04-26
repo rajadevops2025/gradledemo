@@ -46,7 +46,7 @@ jobs:
         shell: bash
 
       - name: Run Application
-        run: java -jar build/libs/gradledemo-1.0.0.jar
+        run: java -jar build/libs/gradle-simple-project-1.0.0.jar
         shell: bash
 
       - name: Archive JAR Artifact
