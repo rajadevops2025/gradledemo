@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'  // Enables 'gradle run' and better project setup
 }
 
 group = 'com.example'
@@ -14,15 +15,20 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
 }
 
+application {
+    mainClass = 'com.example.App'  // This defines the entry point for the application
+}
+
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
 jar {
-    archiveBaseName = 'gradledemo'  // <--- This will make the jar name "gradledemo-1.0.0.jar"
-    archiveVersion = '1.0.0'
+    archiveBaseName.set('gradle-simple-project')  // Sets the JAR name prefix
+    archiveVersion.set('1.0.0')                   // Sets the JAR version
     manifest {
-        attributes 'Main-Class': 'com.example.App'
+        attributes(
+            'Main-Class': 'com.example.App'       // Required to run the JAR with 'java -jar'
+        )
     }
-    archiveBaseName.set('gradle-simple-project')
 }
