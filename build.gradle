@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'application'
+    id 'application'  // For running the application with gradle run
 }
 
 group = 'com.example'
@@ -16,7 +16,7 @@ dependencies {
 }
 
 application {
-    mainClass = 'com.example.App'
+    mainClass = 'com.example.App'  // Main class entry point
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -26,8 +26,8 @@ tasks.withType(JavaCompile).configureEach {
 jar {
     manifest {
         attributes(
-            'Main-Class': 'com.example.App'
+            'Main-Class': 'com.example.App'  // This sets the entry point for the JAR
         )
     }
-    from sourceSets.main.output  // 👈 THIS LINE includes your compiled classes
+    from sourceSets.main.output  // Ensures all compiled classes are included in the JAR
 }
