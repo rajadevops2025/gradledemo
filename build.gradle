@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'application'  // Enables 'gradle run' and better project setup
+    id 'application'
 }
 
 group = 'com.example'
@@ -16,7 +16,7 @@ dependencies {
 }
 
 application {
-    mainClass = 'com.example.App'  // This defines the entry point for the application
+    mainClass = 'com.example.App'
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -24,11 +24,10 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 jar {
-    archiveBaseName.set('gradle-simple-project')  // Sets the JAR name prefix
-    archiveVersion.set('1.0.0')                   // Sets the JAR version
     manifest {
         attributes(
-            'Main-Class': 'com.example.App'       // Required to run the JAR with 'java -jar'
+            'Main-Class': 'com.example.App'
         )
     }
+    from sourceSets.main.output  // 👈 THIS LINE includes your compiled classes
 }
