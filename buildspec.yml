@@ -1,0 +1,36 @@
+version: 0.2
+
+env:
+  variables:
+    JAVA_HOME: "/usr/lib/jvm/java-17"
+    JAR_NAME: "gradle-simple-project-1.0.0.jar"
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+    commands:
+      - echo === Installing Gradle Wrapper ===
+      - chmod +x gradlew
+
+  pre_build:
+    commands:
+      - echo === Cleaning and Preparing the Project ===
+      - ./gradlew clean
+
+  build:
+    commands:
+      - echo === Building the Project ===
+      - ./gradlew build
+
+  post_build:
+    commands:
+      - echo === Verifying JAR File ===
+      - ls -l build/libs
+      - echo === Running JAR ===
+      - java -jar build/libs/${JAR_NAME} &  # Run in background (optional)
+      # - sleep 10  # optional: give time to verify jar runs correctly
+
+artifacts:
+  files:
+    - build/libs/*.jar
