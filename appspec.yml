@@ -1,0 +1,27 @@
+version: 0.0
+os: linux
+
+files:
+  - source: build/libs/
+    destination: /home/ubuntu/app/
+
+hooks:
+  BeforeInstall:
+    - location: scripts/stop_app.sh
+      timeout: 60
+      runas: ubuntu
+
+  AfterInstall:
+    - location: scripts/set_permissions.sh
+      timeout: 30
+      runas: ubuntu
+
+  ApplicationStart:
+    - location: scripts/start_app.sh
+      timeout: 60
+      runas: ubuntu
+
+  ValidateService:
+    - location: scripts/validate.sh
+      timeout: 30
+      runas: ubuntu
